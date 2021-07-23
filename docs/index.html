@@ -1,0 +1,221 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@kobayami/threads</title>
+	<meta name="description" content="Documentation for @kobayami/threads">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@kobayami/threads</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>@kobayami/threads</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#kobayamithreads" id="kobayamithreads" style="color: inherit; text-decoration: none;">
+					<h1>@kobayami/threads</h1>
+				</a>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code class="language-sh"><span style="color: #000000">npm install --save @kobayami/threads</span>
+</code></pre>
+				<a href="#version-and-license" id="version-and-license" style="color: inherit; text-decoration: none;">
+					<h2>Version and License</h2>
+				</a>
+				<ul>
+					<li>Latest version: 1.0.0</li>
+					<li>License: <a href="https://kobayami.github.io/threads/LICENSE.md">MIT</a></li>
+					<li><a href="https://kobayami.github.io/threads/CHANGES.md">Changes</a></li>
+				</ul>
+				<a href="#summary" id="summary" style="color: inherit; text-decoration: none;">
+					<h2>Summary</h2>
+				</a>
+				<p>Enables direct function calls from main thread into worker threads instead of manual message passing.
+				This simplifies the usage of worker threads a lot!</p>
+				<p>This library works for both Web and NodeJS environments and provides a common adapter API
+					for the platform specific parts, so that the same application code can be run
+				in both environments without modification.</p>
+				<p>Core features of this library include:</p>
+				<ul>
+					<li>Direct function calls from main thread into services run on worker threads</li>
+					<li>Own very lightweight RMI protocol specifically for this purpose</li>
+					<li>Automatic handling of transfer objects</li>
+					<li>Support for synchronous and asynchronous service implementations </li>
+					<li>Compatible with Web and NodeJS environments</li>
+				</ul>
+				<a href="#usage-example" id="usage-example" style="color: inherit; text-decoration: none;">
+					<h2>Usage Example</h2>
+				</a>
+				<p>Service interface:</p>
+				<pre><code class="language-ts"><span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">RenderService</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #795E26">enable</span><span style="color: #000000">(</span><span style="color: #001080">surface</span><span style="color: #000000">: </span><span style="color: #267F99">OffscreenCanvas</span><span style="color: #000000">): </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">void</span><span style="color: #000000">&gt;;</span>
+<span style="color: #000000">    </span><span style="color: #795E26">getSurface</span><span style="color: #000000">(): </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">OffscreenCanvas</span><span style="color: #000000"> | </span><span style="color: #267F99">null</span><span style="color: #000000">&gt;;</span>
+<span style="color: #000000">    </span><span style="color: #795E26">setMaxFps</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">): </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">void</span><span style="color: #000000">&gt;;</span>
+<span style="color: #000000">    </span><span style="color: #795E26">getCurrentFps</span><span style="color: #000000">(): </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">number</span><span style="color: #000000">&gt;;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>Main thread (<code>main.js</code>), or client side:</p>
+				<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">renderService</span><span style="color: #000000"> = </span><span style="color: #795E26">createServiceRmiProxy</span><span style="color: #000000">&lt;</span><span style="color: #267F99">RenderService</span><span style="color: #000000">&gt;(</span>
+<span style="color: #000000">    </span><span style="color: #795E26">startWorker</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;./render.worker&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">);</span>
+
+<span style="color: #001080">renderService</span><span style="color: #000000">.</span><span style="color: #795E26">enable</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">OffscreenCanvas</span><span style="color: #000000">(</span><span style="color: #098658">640</span><span style="color: #000000">, </span><span style="color: #098658">480</span><span style="color: #000000">));</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">canvas</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">renderService</span><span style="color: #000000">.</span><span style="color: #795E26">getSurface</span><span style="color: #000000">();</span>
+<span style="color: #001080">renderservice</span><span style="color: #000000">.</span><span style="color: #795E26">setMaxFps</span><span style="color: #000000">(</span><span style="color: #098658">60</span><span style="color: #000000">);</span>
+<span style="color: #795E26">delay</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">currentFps</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">renderService</span><span style="color: #000000">.</span><span style="color: #795E26">getCurrentFps</span><span style="color: #000000">();</span>
+</code></pre>
+				<p>Worker thread (<code>render.worker.js</code>), or server side:</p>
+				<pre><code class="language-ts"><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">RenderServiceImpl</span><span style="color: #000000"> </span><span style="color: #0000FF">implements</span><span style="color: #000000"> </span><span style="color: #267F99">RenderService</span><span style="color: #000000"> {</span>
+
+<span style="color: #000000">    </span><span style="color: #001080">surface</span><span style="color: #000000">: </span><span style="color: #267F99">OffscreenCanvas</span><span style="color: #000000"> | </span><span style="color: #267F99">null</span><span style="color: #000000"> = </span><span style="color: #0000FF">null</span><span style="color: #000000">;</span>
+<span style="color: #000000">  </span>
+<span style="color: #000000">    </span><span style="color: #001080">maxFps</span><span style="color: #000000"> = </span><span style="color: #098658">60</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span>
+<span style="color: #000000">    </span><span style="color: #001080">lastRenderCycleTimeMs</span><span style="color: #000000"> = </span><span style="color: #267F99">Number</span><span style="color: #000000">.MAX_VALUE;</span>
+<span style="color: #000000">    </span>
+<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">enable</span><span style="color: #000000">(</span><span style="color: #001080">surface</span><span style="color: #000000">: </span><span style="color: #267F99">OffscreenCanvas</span><span style="color: #000000">): </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">void</span><span style="color: #000000">&gt; {</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">surface</span><span style="color: #000000"> = </span><span style="color: #001080">surface</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26">startRenderLoop</span><span style="color: #000000">();</span>
+<span style="color: #000000">    }</span>
+
+<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">getSurface</span><span style="color: #000000">(): </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">OffscreenCanvas</span><span style="color: #000000"> | </span><span style="color: #267F99">null</span><span style="color: #000000">&gt; {</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">surface</span><span style="color: #000000">;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">    </span>
+<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">setMaxFps</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">): </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">void</span><span style="color: #000000">&gt; {</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">maxFps</span><span style="color: #000000"> = </span><span style="color: #001080">value</span><span style="color: #000000">;</span>
+<span style="color: #000000">    }</span>
+
+<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">getCurrentFps</span><span style="color: #000000">(): </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">number</span><span style="color: #000000">&gt; {</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #098658">1000</span><span style="color: #000000"> / </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">lastRenderCycleTimeMs</span><span style="color: #000000">;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">    </span>
+<span style="color: #000000">    </span><span style="color: #0000FF">private</span><span style="color: #000000"> </span><span style="color: #795E26">startRenderLoop</span><span style="color: #000000">() {</span>
+<span style="color: #000000">        ...</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #795E26">dispatchRmiRequestsSync</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">RenderServiceImpl</span><span style="color: #000000">());</span>
+</code></pre>
+				<a href="#see-also" id="see-also" style="color: inherit; text-decoration: none;">
+					<h2>See Also</h2>
+				</a>
+				<ul>
+					<li><a href="https://kobayami.github.io/threads/docs/modules.html">API Documentation</a></li>
+					<li><a href="https://kobayami.github.io/threads">Project Homepage</a></li>
+					<li><a href="https://github.com/kobayami/threads">Project on GitHub</a></li>
+					<li><a href="https://github.com/kobayami/threads/issues">Issues</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/sequentialexecutor.html" class="tsd-kind-icon">Sequential<wbr>Executor</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/deferred.html" class="tsd-kind-icon">Deferred</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/webornodermiport.html" class="tsd-kind-icon">Web<wbr>OrNode<wbr>Rmi<wbr>Port</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#createservicermiproxy" class="tsd-kind-icon">create<wbr>Service<wbr>Rmi<wbr>Proxy</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#delay" class="tsd-kind-icon">delay</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dispatchrmirequestsasync" class="tsd-kind-icon">dispatch<wbr>Rmi<wbr>Requests<wbr>Async</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dispatchrmirequestssync" class="tsd-kind-icon">dispatch<wbr>Rmi<wbr>Requests<wbr>Sync</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getworkerrmiport" class="tsd-kind-icon">get<wbr>Worker<wbr>Rmi<wbr>Port</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#startworker" class="tsd-kind-icon">start<wbr>Worker</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
