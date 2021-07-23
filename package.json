@@ -1,6 +1,6 @@
 {
     "name": "@kobayami/threads",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Enables direct function calls from main thread into worker threads instead of manual message passing.",
     "main": "lib/index.js",
     "scripts": {
@@ -30,12 +30,12 @@
         "jasmine.json"
     ],
     "keywords": [
-        "LCG",
+        "worker",
         "threads",
-        "number",
-        "seed",
-        "java",
-        "java.util.threads"
+        "rmi",
+        "transfer objects",
+        "delay",
+        "sequential"
     ],
     "author": "Marco Kaufmann",
     "license": "MIT",
